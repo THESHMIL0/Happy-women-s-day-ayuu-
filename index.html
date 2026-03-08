@@ -5,35 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Ayuu 🦋</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* The overall page styling */
+        /* Animated gradient background */
         body {
-            background-color: #ffe4e1; /* Cute pastel pink background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            margin: 0;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Takes up the full height of the screen */
-            margin: 0;
-            overflow: hidden; /* Prevents scrolling when butterflies fly */
-            color: #5d4037; /* Soft brown text color */
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #ffd1ff, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            color: #4a4a4a;
         }
 
-        /* Styling for the interactive button */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Premium glowing button */
         #reveal-btn {
-            background-color: #ffb6c1; 
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             color: #fff;
             border: none;
-            padding: 15px 30px;
-            font-size: 20px;
-            font-weight: bold;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s; /* Smooth bounce effect */
+            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
+            transition: all 0.3s ease;
+            z-index: 20;
         }
+
+        #reveal-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6);
+        }
+
+        /* Glassmorphism message card */
+        #message-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px); /* Creates the frosted glass effect */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            max-width: 500px;
+            text-align: center;
+            animation: floatUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Cute handwritten title */
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 48px;
+            margin-top: 0;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        /* Polaroid style photo frame */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid:hover {
+            transform: rotate(2deg) scale(1.05); /* Slight movement on hover */
+        }
+
+        .polaroid-img {
+            width: 200px;
+            height: 200px;
+            background-color: #fce4ec;
+            object-fit: cover;
+            display: block;
+        }
+
+        .message-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Magic particles styling */
+        .particle {
+            position: absolute;
+            font-size: 25px;
+            bottom: -50px;
+            z-index: 1;
+            pointer-events: none; /* Allows clicking through them */
+            animation: floatParticle linear forwards;
+        }
+
+        @keyframes floatParticle {
+            to {
+                transform: translateY(-120vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="reveal-btn" onclick="revealSurprise()">Tap for Magic 🪄</button>
+
+    <div id="message-container">
+        <h1>Happy Women's Day, Ayuu! 🦋</h1>
+        
+        <div class="polaroid">
+            <img class="polaroid-img" src="https://via.placeholder.com/200x200.png?text=Ayuu's+Photo" alt="Ayuu">
+        </div>
+        
+        <p class="message-text">You are incredibly special, amazing, and inspiring.<br>Thank you for making every day brighter just by being you.</p>
+        <p class="message-text"><b>With all my love. 💕</b></p>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            // Hide the button with a fade-out effect
+            const btn = document.getElementById("reveal-btn");
+            btn.style.opacity = "0";
+            setTimeout(() => btn.style.display = "none", 300); // Wait for fade before removing
+            
+            // Show the premium glass card
+            document.getElementById("message-container").style.display = "block";
+            
+            // Start the magic particle rain
+            createMagic();
+        }
+
+        function createMagic() {
+            // Array of cute emojis to spawn
+            const magicItems = ['🦋', '💕', '✨', '🌸'];
+            
+            // Create 50 particles for a premium feel
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement("div");
+                    particle.classList.add("particle");
+                    
+                    // Pick a random emoji from our array
+                    const randomItem = magicItems[Math.floor(Math.random() * magicItems.length)];
+                    particle.innerHTML = randomItem;
+                    
+                    // Randomize position, size, and speed
+                    particle.style.left = Math.random() * 100 + "vw";
+                    particle.style.fontSize = (Math.random() * 20 + 15) + "px"; // Different sizes
+                    particle.style.animationDuration = (Math.random() * 4 + 4) + "s"; // Smooth, varied flying
+                    
+                    document.body.appendChild(particle);
+                    
+                    // Clean up the particle once it flies away
+                    setTimeout(() => particle.remove(), 8000);
+                }, i * 100); // Release them one by one quickly
+            }
+        }
+    </script>
+
+</body>
+</html>
 
         /* Makes the button slightly bigger when hovered */
         #reveal-btn:hover {
