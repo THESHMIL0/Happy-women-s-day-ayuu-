@@ -29,6 +29,20 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Cute drifting background clouds */
+        .cloud {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.4); /* Soft semi-transparent white */
+            z-index: 0;
+            animation: drift linear infinite;
+            pointer-events: none; /* So they don't block clicks */
+        }
+
+        @keyframes drift {
+            from { transform: translateX(-200px); }
+            to { transform: translateX(110vw); }
+        }
+
         #reveal-btn {
             background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             color: #fff;
@@ -117,6 +131,36 @@
             min-height: 60px; 
         }
 
+        /* The cute blinking cursor for the typing effect */
+        .blinking-cursor::after {
+            content: '|';
+            color: #d81b60;
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Making the final signature interactive */
+        #love-text {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        #love-text:hover {
+            transform: scale(1.15) rotate(-2deg);
+        }
+
+        /* The hidden secret message text */
+        #secret-message {
+            display: none;
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            color: #d81b60;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
         .particle {
             position: absolute;
             font-size: 25px;
@@ -136,6 +180,8 @@
 </head>
 <body>
 
+    <audio id="bg-music" src="song.mp3"></audio>
+
     <button id="reveal-btn" onclick="revealSurprise()">Tap for Magic 🪄</button>
 
     <div id="message-container">
@@ -145,8 +191,11 @@
             <img class="polaroid-img" src="ayu.jpg" alt="Ayuu 🦋">
         </div>
         
-        <p id="typed-text" class="message-text"></p>
-        <p id="love-text" class="message-text" style="display: none; margin-top: 15px;"><b>With all my love. 💕</b></p>
+        <p id="typed-text" class="message-text blinking-cursor"></p>
+        
+        <p id="love-text" class="message-text" style="display: none; margin-top: 15px;" onclick="revealSecret()"><b>With all my love. 💕</b></p>
+        
+        <p id="secret-message">P.S. You are my favorite person! 🥺</p>
     </div>
 
     <script>
@@ -154,7 +203,22 @@
         let letterIndex = 0;
         let typingSpeed = 60; 
 
+        // Generate clouds as soon as the page loads
+        window.onload = function() {
+            for(let i = 0; i < 6; i++) {
+                let cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.innerHTML = '☁️';
+                cloud.style.top = (Math.random() * 80) + 'vh';
+                cloud.style.fontSize = (Math.random() * 40 + 80) + 'px'; // Random big sizes
+                cloud.style.animationDuration = (Math.random() * 40 + 30) + 's'; // Slow drifting speed
+                cloud.style.animationDelay = '-' + (Math.random() * 50) + 's'; // Scatters them across the screen instantly
+                document.body.appendChild(cloud);
+            }
+        };
+
         function revealSurprise() {
+            document.getElementById("bg-music").play();
             document.getElementById("reveal-btn").style.display = "none";
             document.getElementById("message-container").style.display = "block";
             
@@ -168,8 +232,21 @@
                 letterIndex++;
                 setTimeout(typeWriter, typingSpeed);
             } else {
+                // When done typing, remove the blinking cursor and show the signature
+                document.getElementById("typed-text").classList.remove("blinking-cursor");
                 document.getElementById("love-text").style.display = "block";
                 document.getElementById("love-text").style.animation = "floatUp 1s ease";
+            }
+        }
+
+        function revealSecret() {
+            document.getElementById("secret-message").style.display = "block";
+            document.getElementById("secret-message").style.animation = "floatUp 0.8s ease";
+            
+            // Shower of kisses and heart eyes!
+            const kisses = ['💋', '🥰', '🥺', '💖'];
+            for (let i = 0; i < 20; i++) {
+                spawnParticle(kisses);
             }
         }
 
