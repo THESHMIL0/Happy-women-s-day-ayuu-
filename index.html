@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Animated gradient background and custom Sparkle Cursor! ✨ */
+        /* Animated gradient background and SAFE Sparkle Cursor ✨ */
         body {
             margin: 0;
             height: 100vh;
@@ -21,8 +21,8 @@
             animation: gradientBG 15s ease infinite;
             overflow: hidden;
             color: #4a4a4a;
-            /* This line turns the mouse pointer into a sparkle */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="font-size:20px"><text y="20">✨</text></svg>'), auto;
+            /* Properly encoded so it doesn't break the browser! */
+            cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='font-size:20px'%3E%3Ctext y='20'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E"), auto;
         }
 
         @keyframes gradientBG {
@@ -34,6 +34,187 @@
         /* Pulsing glowing button */
         #reveal-btn {
             background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 40px;
+            font-size: 22px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
+            transition: all 0.3s ease;
+            z-index: 20;
+            animation: pulse 2s infinite; 
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #reveal-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6);
+            animation: none; 
+        }
+
+        /* Glassmorphism message card */
+        #message-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            max-width: 500px;
+            text-align: center;
+            animation: floatUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            z-index: 10;
+        }
+
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 48px;
+            margin-top: 0;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        /* Interactive Polaroid */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer; 
+        }
+
+        .polaroid:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .polaroid-img {
+            width: 200px;
+            height: 200px;
+            background-color: #fce4ec;
+            object-fit: cover;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .message-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 0;
+            min-height: 60px; 
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 25px;
+            bottom: -50px;
+            z-index: 1;
+            pointer-events: none;
+            animation: floatParticle linear forwards;
+        }
+
+        @keyframes floatParticle {
+            to {
+                transform: translateY(-120vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="reveal-btn" onclick="revealSurprise()">Tap for Magic 🪄</button>
+
+    <div id="message-container">
+        <h1>Happy Women's Day, Ayuu! 🦋</h1>
+        
+        <div class="polaroid" onclick="burstHearts()">
+            <img class="polaroid-img" src="ayu.jpg" alt="Ayuu 🦋">
+        </div>
+        
+        <p id="typed-text" class="message-text"></p>
+        <p id="love-text" class="message-text" style="display: none; margin-top: 15px;"><b>With all my love. 💕</b></p>
+    </div>
+
+    <script>
+        const message = "You are incredibly special, amazing, and inspiring. Thank you for making every day brighter just by being you.";
+        let letterIndex = 0;
+        let typingSpeed = 60; 
+
+        function revealSurprise() {
+            // Hiding instantly fixes the awkward layout jumping!
+            document.getElementById("reveal-btn").style.display = "none";
+            
+            // Show the card
+            document.getElementById("message-container").style.display = "block";
+            
+            createMagic();
+            setTimeout(typeWriter, 800); 
+        }
+
+        function typeWriter() {
+            if (letterIndex < message.length) {
+                document.getElementById("typed-text").innerHTML += message.charAt(letterIndex);
+                letterIndex++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                document.getElementById("love-text").style.display = "block";
+                document.getElementById("love-text").style.animation = "floatUp 1s ease";
+            }
+        }
+
+        function createMagic() {
+            const magicItems = ['🦋', '💕', '✨', '🌸'];
+            for (let i = 0; i < 50; i++) {
+                spawnParticle(magicItems);
+            }
+        }
+
+        function burstHearts() {
+            const hearts = ['💖', '💗', '💓', '💘'];
+            for (let i = 0; i < 15; i++) {
+                spawnParticle(hearts);
+            }
+        }
+
+        function spawnParticle(itemArray) {
+            setTimeout(() => {
+                const particle = document.createElement("div");
+                particle.classList.add("particle");
+                
+                const randomItem = itemArray[Math.floor(Math.random() * itemArray.length)];
+                particle.innerHTML = randomItem;
+                
+                particle.style.left = Math.random() * 100 + "vw";
+                particle.style.fontSize = (Math.random() * 20 + 15) + "px";
+                particle.style.animationDuration = (Math.random() * 4 + 4) + "s";
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 8000);
+            }, Math.random() * 1000); 
+        }
+    </script>
+
+</body>
+</html>
             color: #fff;
             border: none;
             padding: 18px 40px;
