@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Animated gradient background and SAFE Sparkle Cursor ✨ */
         body {
             margin: 0;
             height: 100vh;
@@ -21,7 +20,6 @@
             animation: gradientBG 15s ease infinite;
             overflow: hidden;
             color: #4a4a4a;
-            /* Properly encoded so it doesn't break the browser! */
             cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='font-size:20px'%3E%3Ctext y='20'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E"), auto;
         }
 
@@ -31,7 +29,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Pulsing glowing button */
         #reveal-btn {
             background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             color: #fff;
@@ -60,17 +57,17 @@
             animation: none; 
         }
 
-        /* Glassmorphism message card */
         #message-container {
             display: none;
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 50px;
+            padding: 40px;
             border-radius: 30px;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            max-width: 500px;
+            max-width: 90%;
+            width: 400px;
             text-align: center;
             animation: floatUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
             z-index: 10;
@@ -83,16 +80,15 @@
 
         h1 {
             font-family: 'Caveat', cursive;
-            font-size: 48px;
+            font-size: 42px;
             margin-top: 0;
             color: #d81b60;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
         }
 
-        /* Interactive Polaroid */
         .polaroid {
             background: white;
-            padding: 10px 10px 25px 10px;
+            padding: 10px 10px 20px 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transform: rotate(-3deg);
             display: inline-block;
@@ -106,8 +102,8 @@
         }
 
         .polaroid-img {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             background-color: #fce4ec;
             object-fit: cover;
             display: block;
@@ -159,10 +155,7 @@
         let typingSpeed = 60; 
 
         function revealSurprise() {
-            // Hiding instantly fixes the awkward layout jumping!
             document.getElementById("reveal-btn").style.display = "none";
-            
-            // Show the card
             document.getElementById("message-container").style.display = "block";
             
             createMagic();
@@ -215,456 +208,3 @@
 
 </body>
 </html>
-            color: #fff;
-            border: none;
-            padding: 18px 40px;
-            font-size: 22px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
-            transition: all 0.3s ease;
-            z-index: 20;
-            animation: pulse 2s infinite; /* The cute breathing effect */
-        }
-
-        /* The animation for the button pulse */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        #reveal-btn:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6);
-            animation: none; /* Stops pulsing when she hovers over it */
-        }
-
-        /* Glassmorphism message card */
-        #message-container {
-            display: none;
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 50px;
-            border-radius: 30px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            max-width: 500px;
-            text-align: center;
-            animation: floatUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            z-index: 10;
-        }
-
-        @keyframes floatUp {
-            from { opacity: 0; transform: translateY(50px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 48px;
-            margin-top: 0;
-            color: #d81b60;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-        }
-
-        /* Interactive Polaroid */
-        .polaroid {
-            background: white;
-            padding: 10px 10px 25px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: rotate(-3deg);
-            display: inline-block;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            cursor: pointer; /* Suggests it can be clicked */
-        }
-
-        .polaroid:hover {
-            transform: rotate(2deg) scale(1.05);
-        }
-
-        .polaroid-img {
-            width: 200px;
-            height: 200px;
-            background-color: #fce4ec;
-            object-fit: cover;
-            display: block;
-            border-radius: 2px;
-        }
-
-        .message-text {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 0;
-            min-height: 60px; /* Keeps space so the box doesn't jump while typing */
-        }
-
-        .particle {
-            position: absolute;
-            font-size: 25px;
-            bottom: -50px;
-            z-index: 1;
-            pointer-events: none;
-            animation: floatParticle linear forwards;
-        }
-
-        @keyframes floatParticle {
-            to {
-                transform: translateY(-120vh) translateX(20px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <button id="reveal-btn" onclick="revealSurprise()">Tap for Magic 🪄</button>
-
-    <div id="message-container">
-        <h1>Happy Women's Day, Ayuu! 🦋</h1>
-        
-        <div class="polaroid" onclick="burstHearts()">
-            <img class="polaroid-img" src="ayu.jpg" alt="Ayuu 🦋">
-        </div>
-        
-        <p id="typed-text" class="message-text"></p>
-        <p id="love-text" class="message-text" style="display: none; margin-top: 15px;"><b>With all my love. 💕</b></p>
-    </div>
-
-    <script>
-        // The secret message we will type out
-        const message = "You are incredibly special, amazing, and inspiring. Thank you for making every day brighter just by being you.";
-        let letterIndex = 0;
-        let typingSpeed = 60; // Speed of typing in milliseconds
-
-        function revealSurprise() {
-            const btn = document.getElementById("reveal-btn");
-            btn.style.opacity = "0";
-            setTimeout(() => btn.style.display = "none", 300);
-            
-            document.getElementById("message-container").style.display = "block";
-            
-            createMagic();
-            
-            // Wait 1 second for the card to float up, then start typing!
-            setTimeout(typeWriter, 1000); 
-        }
-
-        // The Typewriter effect function
-        function typeWriter() {
-            if (letterIndex < message.length) {
-                document.getElementById("typed-text").innerHTML += message.charAt(letterIndex);
-                letterIndex++;
-                setTimeout(typeWriter, typingSpeed);
-            } else {
-                // Show the final signature when done typing
-                document.getElementById("love-text").style.display = "block";
-                document.getElementById("love-text").style.animation = "floatUp 1s ease";
-            }
-        }
-
-        // Spawns the main butterflies and sparkles
-        function createMagic() {
-            const magicItems = ['🦋', '💕', '✨', '🌸'];
-            for (let i = 0; i < 50; i++) {
-                spawnParticle(magicItems);
-            }
-        }
-
-        // Spawns extra hearts when Ayuu clicks her photo!
-        function burstHearts() {
-            const hearts = ['💖', '💗', '💓', '💘'];
-            for (let i = 0; i < 15; i++) {
-                spawnParticle(hearts);
-            }
-        }
-
-        // The helper function that actually creates the floating items
-        function spawnParticle(itemArray) {
-            setTimeout(() => {
-                const particle = document.createElement("div");
-                particle.classList.add("particle");
-                
-                const randomItem = itemArray[Math.floor(Math.random() * itemArray.length)];
-                particle.innerHTML = randomItem;
-                
-                particle.style.left = Math.random() * 100 + "vw";
-                particle.style.fontSize = (Math.random() * 20 + 15) + "px";
-                particle.style.animationDuration = (Math.random() * 4 + 4) + "s";
-                
-                document.body.appendChild(particle);
-                
-                // Remove particle from code once it floats away
-                setTimeout(() => particle.remove(), 8000);
-            }, Math.random() * 1000); // Random delays make it look natural
-        }
-    </script>
-
-</body>
-</html>
-            padding: 18px 40px;
-            font-size: 22px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 154, 158, 0.4);
-            transition: all 0.3s ease;
-            z-index: 20;
-        }
-
-        #reveal-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(255, 154, 158, 0.6);
-        }
-
-        /* Glassmorphism message card */
-        #message-container {
-            display: none;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(12px); /* Creates the frosted glass effect */
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 50px;
-            border-radius: 30px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            max-width: 500px;
-            text-align: center;
-            animation: floatUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            z-index: 10;
-        }
-
-        @keyframes floatUp {
-            from { opacity: 0; transform: translateY(50px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Cute handwritten title */
-        h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 48px;
-            margin-top: 0;
-            color: #d81b60;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
-        }
-
-        /* Polaroid style photo frame */
-        .polaroid {
-            background: white;
-            padding: 10px 10px 25px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: rotate(-3deg);
-            display: inline-block;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .polaroid:hover {
-            transform: rotate(2deg) scale(1.05); /* Slight movement on hover */
-        }
-
-        .polaroid-img {
-            width: 200px;
-            height: 200px;
-            background-color: #fce4ec;
-            object-fit: cover;
-            display: block;
-        }
-
-        .message-text {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-
-        /* Magic particles styling */
-        .particle {
-            position: absolute;
-            font-size: 25px;
-            bottom: -50px;
-            z-index: 1;
-            pointer-events: none; /* Allows clicking through them */
-            animation: floatParticle linear forwards;
-        }
-
-        @keyframes floatParticle {
-            to {
-                transform: translateY(-120vh) translateX(20px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <button id="reveal-btn" onclick="revealSurprise()">Tap for Magic 🪄</button>
-
-    <div id="message-container">
-        <h1>Happy Women's Day, Ayuu! 🦋</h1>
-        
-        <div class="polaroid">
-            <img class="polaroid-img" src="https://via.placeholder.com/200x200.png?text=Ayuu's+Photo" alt="Ayuu">
-        </div>
-        
-        <p class="message-text">You are incredibly special, amazing, and inspiring.<br>Thank you for making every day brighter just by being you.</p>
-        <p class="message-text"><b>With all my love. 💕</b></p>
-    </div>
-
-    <script>
-        function revealSurprise() {
-            // Hide the button with a fade-out effect
-            const btn = document.getElementById("reveal-btn");
-            btn.style.opacity = "0";
-            setTimeout(() => btn.style.display = "none", 300); // Wait for fade before removing
-            
-            // Show the premium glass card
-            document.getElementById("message-container").style.display = "block";
-            
-            // Start the magic particle rain
-            createMagic();
-        }
-
-        function createMagic() {
-            // Array of cute emojis to spawn
-            const magicItems = ['🦋', '💕', '✨', '🌸'];
-            
-            // Create 50 particles for a premium feel
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement("div");
-                    particle.classList.add("particle");
-                    
-                    // Pick a random emoji from our array
-                    const randomItem = magicItems[Math.floor(Math.random() * magicItems.length)];
-                    particle.innerHTML = randomItem;
-                    
-                    // Randomize position, size, and speed
-                    particle.style.left = Math.random() * 100 + "vw";
-                    particle.style.fontSize = (Math.random() * 20 + 15) + "px"; // Different sizes
-                    particle.style.animationDuration = (Math.random() * 4 + 4) + "s"; // Smooth, varied flying
-                    
-                    document.body.appendChild(particle);
-                    
-                    // Clean up the particle once it flies away
-                    setTimeout(() => particle.remove(), 8000);
-                }, i * 100); // Release them one by one quickly
-            }
-        }
-    </script>
-
-</body>
-</html>
-
-        /* Makes the button slightly bigger when hovered */
-        #reveal-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* The hidden message box */
-        #message-container {
-            display: none; /* Hidden by default */
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
-            max-width: 80%;
-            animation: fadeIn 2s ease-in-out; /* Smooth fade-in effect */
-            z-index: 10; /* Keeps the message above the butterflies */
-        }
-
-        /* CSS Animation for fading in */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Styling for the placeholder image */
-        .photo-placeholder {
-            width: 200px;
-            height: 200px;
-            background-color: #fce4ec;
-            border: 4px dashed #f48fb1;
-            border-radius: 50%;
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #f48fb1;
-            font-weight: bold;
-            object-fit: cover; /* Ensures the image looks nice when added */
-        }
-
-        /* Butterfly animation classes generated by JavaScript */
-        .butterfly {
-            position: absolute;
-            font-size: 30px;
-            bottom: -50px; /* Starts below the screen */
-            animation: flyUp 4s linear forwards;
-            z-index: 1;
-        }
-
-        @keyframes flyUp {
-            to {
-                transform: translateY(-120vh) rotate(360deg); /* Flies off the top of the screen */
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <button id="reveal-btn" onclick="revealSurprise()">Click for a Surprise 😼</button>
-
-    <div id="message-container">
-        <h1>Happy Women's Day, Ayuu! 🦋</h1>
-        
-        <img class="photo-placeholder" src="" alt="[Add Ayuu's Photo Here]">
-        
-        <p>You are incredibly special, amazing, and inspiring.<br>Thank you for being you!</p>
-        <p><b>With love. 💕</b></p>
-    </div>
-
-    <script>
-        function revealSurprise() {
-            // 1. Hide the button
-            document.getElementById("reveal-btn").style.display = "none";
-            
-            // 2. Show the hidden message
-            document.getElementById("message-container").style.display = "block";
-            
-            // 3. Create a lot of floating butterflies!
-            createButterflies();
-        }
-
-        function createButterflies() {
-            // A loop to create 30 butterflies
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const butterfly = document.createElement("div");
-                    butterfly.classList.add("butterfly");
-                    butterfly.innerHTML = "🦋"; // The emoji used
-                    
-                    // Randomize where they appear horizontally
-                    butterfly.style.left = Math.random() * 100 + "vw"; 
-                    
-                    // Randomize their flying speed slightly
-                    butterfly.style.animationDuration = (Math.random() * 3 + 3) + "s"; 
-                    
-                    // Add the butterfly to the webpage
-                    document.body.appendChild(butterfly);
-                    
-                    // Clean up: remove the butterfly from the code after it flies off screen
-                    setTimeout(() => {
-                        butterfly.remove();
-                    }, 6000);
-                }, i * 150); // Stagger their release times
-            }
-        }
-    </script>
-
-</body>
-      </html>
-      
